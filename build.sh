@@ -14,9 +14,13 @@ if [ -z "$1" ]; then
     usage
 fi
 
+if [ -z "$COMPILE_ROOT" ]; then
+    COMPILE_ROOT=".proto"
+fi
+
 # build protocol
 build_protocol() {
-    MODULES=$(find ".proto" -type d);
+    MODULES=$(find "$COMPILE_ROOT" -type d);
     for path in ${MODULES}; do
         HAS_PROTO_FILE=$(eval echo $(bash -c "find "${path}" -maxdepth 1 -name *.proto 2>/dev/null" | wc -l));
         if [ ${HAS_PROTO_FILE} -gt 0 ]; then
@@ -28,7 +32,7 @@ build_protocol() {
             mkdir -p ${MODULE_PATH}/pb;
             mkdir -p ${MODULE_PATH}/client;
             gohub protoc protocol \
-                 --include=.proto \
+                 --include=".proto" \
                  --msg_out="${MODULE_PATH}/pb" \
                  --service_out="${MODULE_PATH}/pb" \
                  --client_out="${MODULE_PATH}/client" \
@@ -45,7 +49,7 @@ build_protocol() {
 
 # clean result files of building
 clean_result() {
-    MODULES=$(find ".proto" -type d);
+    MODULES=$(find "$COMPILE_ROOT" -type d);
     for path in ${MODULES}; do
         HAS_PROTO_FILE=$(eval echo $(bash -c "find "${path}" -maxdepth 1 -name *.proto 2>/dev/null" | wc -l));
         if [ ${HAS_PROTO_FILE} -gt 0 ]; then
