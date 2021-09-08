@@ -88,6 +88,11 @@ func (m *ChangeEndpointRootRequest) UnmarshalURLValues(prefix string, values url
 					m.EndpointApi = &EndpointApi{}
 				}
 				m.EndpointApi.RedirectPath = vals[0]
+			case "endpointApi.redirectApp":
+				if m.EndpointApi == nil {
+					m.EndpointApi = &EndpointApi{}
+				}
+				m.EndpointApi.RedirectApp = vals[0]
 			case "endpointApi.redirectService":
 				if m.EndpointApi == nil {
 					m.EndpointApi = &EndpointApi{}
@@ -412,6 +417,11 @@ func (m *UpdateEndpointApiResponse) UnmarshalURLValues(prefix string, values url
 					m.Data = &EndpointApi{}
 				}
 				m.Data.RedirectPath = vals[0]
+			case "data.redirectApp":
+				if m.Data == nil {
+					m.Data = &EndpointApi{}
+				}
+				m.Data.RedirectApp = vals[0]
 			case "data.redirectService":
 				if m.Data == nil {
 					m.Data = &EndpointApi{}
@@ -708,6 +718,11 @@ func (m *UpdateEndpointApiRequest) UnmarshalURLValues(prefix string, values url.
 					m.EndpointApi = &EndpointApi{}
 				}
 				m.EndpointApi.RedirectPath = vals[0]
+			case "endpointApi.redirectApp":
+				if m.EndpointApi == nil {
+					m.EndpointApi = &EndpointApi{}
+				}
+				m.EndpointApi.RedirectApp = vals[0]
 			case "endpointApi.redirectService":
 				if m.EndpointApi == nil {
 					m.EndpointApi = &EndpointApi{}
@@ -997,6 +1012,8 @@ func (m *EndpointApi) UnmarshalURLValues(prefix string, values url.Values) error
 				m.RedirectAddr = vals[0]
 			case "redirectPath":
 				m.RedirectPath = vals[0]
+			case "redirectApp":
+				m.RedirectApp = vals[0]
 			case "redirectService":
 				m.RedirectService = vals[0]
 			case "redirectRuntimeId":
@@ -1090,6 +1107,11 @@ func (m *CreateEndpointApiRequest) UnmarshalURLValues(prefix string, values url.
 					m.EndpointApi = &EndpointApi{}
 				}
 				m.EndpointApi.RedirectPath = vals[0]
+			case "endpointApi.redirectApp":
+				if m.EndpointApi == nil {
+					m.EndpointApi = &EndpointApi{}
+				}
+				m.EndpointApi.RedirectApp = vals[0]
 			case "endpointApi.redirectService":
 				if m.EndpointApi == nil {
 					m.EndpointApi = &EndpointApi{}
@@ -1360,6 +1382,32 @@ func (m *GetEndpointApisRequest) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "packageId":
 				m.PackageId = vals[0]
+			case "apiPath":
+				m.ApiPath = vals[0]
+			case "method":
+				m.Method = vals[0]
+			case "origin":
+				m.Origin = vals[0]
+			case "diceApp":
+				m.DiceApp = vals[0]
+			case "diceService":
+				m.DiceService = vals[0]
+			case "sortField":
+				m.SortField = vals[0]
+			case "sortType":
+				m.SortType = vals[0]
+			case "pageNo":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.PageNo = val
+			case "pageSize":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.PageSize = val
 			}
 		}
 	}

@@ -271,9 +271,6 @@ func RegisterRuntimeServiceHandler(r http.Router, srv RuntimeServiceHandler, opt
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["service"]; len(vals) > 0 {
-					in.Service = vals[0]
-				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeId = vals[0]
 				}
@@ -285,6 +282,9 @@ func RegisterRuntimeServiceHandler(r http.Router, srv RuntimeServiceHandler, opt
 				}
 				if vals := params["app"]; len(vals) > 0 {
 					in.App = vals[0]
+				}
+				if vals := params["service"]; len(vals) > 0 {
+					in.Service = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
